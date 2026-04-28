@@ -1,0 +1,392 @@
+/* ============================================
+   style.css — Custom Styles for Portfolio Site
+   ============================================ */
+
+/* ---------- Google Font Import ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ---------- CSS Variables (Color Palette) ---------- */
+:root {
+  --primary:    #3b82f6;   /* blue */
+  --primary-dk: #2563eb;
+  --secondary:  #64748b;   /* slate gray */
+  --light-bg:   #f8fafc;
+  --white:      #ffffff;
+  --text-dark:  #1e293b;
+  --text-muted: #64748b;
+  --shadow-sm:  0 2px 8px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 20px rgba(0,0,0,.12);
+  --radius:     12px;
+  --transition: .3s ease;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--light-bg);
+  line-height: 1.7;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  padding: .9rem 0;
+  transition: box-shadow var(--transition);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--primary) !important;
+  letter-spacing: -.3px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--text-dark) !important;
+  padding: .4rem .9rem !important;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: #eff6ff;
+  color: var(--primary) !important;
+}
+
+/* ---------- Hero Section (Home) ---------- */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #e0f2fe 100%);
+  padding-top: 80px; /* offset fixed navbar */
+}
+
+.hero-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: var(--primary-dk);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  padding: .35rem .9rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+.hero-title span { color: var(--primary); }
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+/* Hero avatar ring */
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #38bdf8);
+  z-index: 0;
+  animation: spin-ring 8s linear infinite;
+}
+
+.avatar-img {
+  position: relative;
+  z-index: 1;
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---------- Skill Card (Home) ---------- */
+.skill-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1px solid #e2e8f0;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-icon {
+  font-size: 2.4rem;
+  margin-bottom: .75rem;
+  display: block;
+}
+
+/* ---------- Section Utilities ---------- */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: .4rem;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.section-divider {
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), #38bdf8);
+  border-radius: 2px;
+  margin: .5rem 0 1rem;
+}
+
+/* ---------- About Page ---------- */
+.profile-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.profile-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.2rem;
+}
+
+.info-table td { padding: .4rem .6rem; }
+.info-table td:first-child {
+  font-weight: 600;
+  color: var(--text-dark);
+  width: 110px;
+}
+
+/* Progress bars */
+.progress { height: 10px; border-radius: 50px; }
+.progress-bar {
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--primary), #38bdf8);
+  /* CSS-only animation: reads width from --bar-w custom property set inline on each bar */
+  width: 0;
+  animation: growBar 1.2s ease forwards;
+  animation-delay: .5s;
+}
+
+@keyframes growBar {
+  from { width: 0; }
+  to   { width: var(--bar-w, 0%); }
+}
+
+/* ---------- CV Page ---------- */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #bfdbfe;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 20px;
+  width: 2px;
+  height: calc(100% - 6px);
+  background: #bfdbfe;
+}
+
+.timeline-item:last-child::after { display: none; }
+
+.timeline-date {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.cv-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Contact Page ---------- */
+.contact-form-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  padding: .65rem 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+/* HTML5 validation visual feedback — no JS needed */
+.form-control:not(:placeholder-shown):invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,.12);
+}
+
+.form-control:not(:placeholder-shown):valid {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.12);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dk));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .65rem 1.6rem;
+  font-weight: 600;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59,130,246,.35);
+  color: #fff;
+}
+
+.btn-outline-custom {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  padding: .63rem 1.5rem;
+  font-weight: 600;
+  background: transparent;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn-outline-custom:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 1.8rem 0;
+  font-size: .9rem;
+}
+
+footer a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+footer a:hover { color: var(--white); }
+
+/* ---------- Fade-in Animation (pure CSS, no JS) ---------- */
+/*
+  Elements with .fade-in-up animate automatically on page load.
+  Use inline style="animation-delay: Xs" to stagger multiple items.
+*/
+.fade-in-up {
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Badge overrides ---------- */
+.badge-skill {
+  background: #eff6ff;
+  color: var(--primary-dk);
+  font-weight: 500;
+  font-size: .82rem;
+  border-radius: 50px;
+  padding: .35rem .85rem;
+  border: 1px solid #bfdbfe;
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 768px) {
+  .hero-section { text-align: center; padding-top: 100px; }
+  .hero-subtitle { margin: 0 auto 1.5rem; }
+  .avatar-img { width: 200px; height: 200px; }
+}
